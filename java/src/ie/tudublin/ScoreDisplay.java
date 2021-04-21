@@ -14,8 +14,8 @@ enum NoteType {
 public class ScoreDisplay extends PApplet
 {
 	//String score = "DEFGABcd";
-    //String score = "D2E2F2G2A2B2c2d2";
-	String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
+    String score = "D2E2F2G2A2B2c2d2";
+	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	char[] scoreChars = score.toCharArray();
 	
 	ArrayList<Note> notes = new ArrayList<Note>();
@@ -155,6 +155,13 @@ public class ScoreDisplay extends PApplet
 			text(tempNote.getNote(), x, height/50);
 			//text(tempNote.getNote(), j * offset, border + height/4);
 		}
+
+
+		//float section = map(1, 0, border, 0, width - border);
+		//float y = map(k, 9, 0 , border, height - noteSpacing - offset);
+		float section = height - border;
+		float offset = height / 20;
+		section /= notes.size()- noteSpacing - offset ;
 
 		//Display note
 		for(int k=0; k < notes.size(); k++){
