@@ -14,6 +14,10 @@ public class ScoreDisplay extends PApplet
 	char[] scoreChars = score.toCharArray();
 	
 	ArrayList<Note> notes = new ArrayList<Note>();
+	private float border = 100;
+
+	public float leftMargin;
+	public float margin;
 
 	public void settings()
 	{
@@ -33,11 +37,15 @@ public class ScoreDisplay extends PApplet
 		// for(int i=0; i < scoreChars.length; i++){
 		// 	System.out.println(scoreChars[i]);
 		// }
+
+		// leftMargin = height * 0.2f;
+		// margin = height * 0.05f;
 	}
 
 	public void draw()
 	{
 		background(255);
+		drawNotes();
 		
 	}
 
@@ -82,10 +90,43 @@ public class ScoreDisplay extends PApplet
 			System.out.println(n.getNote() + " " + n.getDuration() + " " + noteName );
 		}
 	}
-	
 
 	void drawNotes()
 	{
+		stroke(255);
+        fill(0);
+        textAlign(CENTER, CENTER);
 
+		//Displays the grid
+        for(int i = 0; i < 6; i++){
+
+			// // //Choose where to display
+            // //float x = map(i, 1, 5, leftMargin, width - margin);
+			// //float y = map(i, 1, 5, leftMargin, width - margin);
+			// float y = map(i, 1, 5, 200, 200);
+
+			// //Displays the grid
+            // line(margin, y, height - margin, y );
+
+			// //Display the grid number
+            // text(y, i, margin / 20);
+
+			//float x = map(i, 0, 5, border, width - border);
+			float x = map(i, 0, notes.size(), border, width - border);
+
+			float y = map(i, 0, 5, border, height - border);
+
+			//draw horizontal
+			line(border, y, width - border, y);
+        }
+
+		// //vertical text
+		// for(int j=0; j< notes.size(); j++){
+		// 	Note tempNote = notes.get(j);
+		// 	stroke(5);
+		// 	fill(100, 50, 50);
+		// 	textSize(30);
+		// 	text(j, tempNote.getNote(), border - 20);
+		// }
 	}
 }
