@@ -28,6 +28,7 @@ public class ScoreDisplay extends PApplet
 	public void setup() 
 	{
 		loadScore();
+		printScore();
 		// System.out.println("Note");
 		// for(int i=0; i < scoreChars.length; i++){
 		// 	System.out.println(scoreChars[i]);
@@ -74,11 +75,12 @@ public class ScoreDisplay extends PApplet
 		// 	System.out.println(n);
 		// }
 
-		// System.out.println("Debug ");
-		// for(int i=0; i < notes.size(); i++){
-		// 	Note n = notes.get(i);
-		// 	System.out.println(n);
-		// }
+		
+		for(int i=0; i < notes.size(); i++){
+			Note n = notes.get(i);
+			String noteName = n.getDuration() > 2 ? "Quaver" : "Crotchet";
+			System.out.println(n.getNote() + " " + n.getDuration() + " " + noteName );
+		}
 	}
 	
 
