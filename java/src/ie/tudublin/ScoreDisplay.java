@@ -6,19 +6,28 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.data.TableRow;
 
+enum NoteType {
+	NOTE,
+	DURATION,
+}
+
 public class ScoreDisplay extends PApplet
 {
 	//String score = "DEFGABcd";
-	//String score = "D2E2F2G2A2B2c2d2";
-	String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
+	String score = "D2E2F2G2A2B2c2d2";
+	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	char[] scoreChars = score.toCharArray();
 	
 	ArrayList<Note> notes = new ArrayList<Note>();
-	private float border = 100;
-	private float noteSpacing = 100;
+	private float border;
+	private float noteSpacing;
 
-	public float leftMargin;
-	public float margin;
+	private boolean[] isSelected;
+
+	// public float leftMargin;
+	// public float margin;
+
+
 
 	public void settings()
 	{
@@ -34,13 +43,10 @@ public class ScoreDisplay extends PApplet
 	{
 		loadScore();
 		printScore();
-		// System.out.println("Note");
-		// for(int i=0; i < scoreChars.length; i++){
-		// 	System.out.println(scoreChars[i]);
-		// }
-
 		// leftMargin = height * 0.2f;
 		// margin = height * 0.05f;
+		border = 100;
+	    noteSpacing = 100;
 	}
 
 	public void draw()
@@ -56,6 +62,7 @@ public class ScoreDisplay extends PApplet
 
 		char _note= ' ';
 		char _duration= ' ';
+
 		//int stringLength = score.length();
 		for(int i=0; i < scoreChars.length; i++){
 			if(i == 0 ){
@@ -78,13 +85,6 @@ public class ScoreDisplay extends PApplet
 	}
 
 	void printScore(){
-		// System.out.println("Debug ");
-		// for(int i=0; i < notes.size(); i++){
-		// 	Note n = notes.get(i);
-		// 	System.out.println(n);
-		// }
-
-		
 		for(int i=0; i < notes.size(); i++){
 			Note n = notes.get(i);
 			String noteName = n.getDuration() > 2 ? "Quaver" : "Crotchet";
@@ -96,6 +96,7 @@ public class ScoreDisplay extends PApplet
 	{
 		stroke(255);
         fill(0);
+		strokeWeight(1);//
         textAlign(CENTER, CENTER);
 
 		//Displays the grid
@@ -103,55 +104,56 @@ public class ScoreDisplay extends PApplet
 
 			stroke(5);
 			fill(100, 50, 50);
-
-			// // //Choose where to display
-            // //float x = map(i, 1, 5, leftMargin, width - margin);
-			// //float y = map(i, 1, 5, leftMargin, width - margin);
-			// float y = map(i, 1, 5, 200, 200);
-
-			// //Displays the grid
-            // line(margin, y, height - margin, y );
-
-			// //Display the grid number
-            // text(y, i, margin / 20);
-
-			//float x = map(i, 0, 5, border, width - border);
 			float x = map(i, 0, notes.size(), border, width - border);
 
 			float y = map(i, 0, 5, border, height - noteSpacing);
 
 			//draw horizontal
 			line(border, y, width - border, y);
-
-			// stroke(5);
-            // fill(100, 50, 50);
-            // textSize(30);
-            // text(i, x, border - 20);
-
-			//vertical text
         }
 
 		//Display letter
 		for(int j=0; j< notes.size(); j++){
-			int offset =(int)width/ notes.size();
+			float x = map(j, 0, notes.size(), border, width - border);
+			//int offset =(int)width/ notes.size();
 			Note tempNote = notes.get(j);
 			stroke(5);
 			fill(100, 50, 50);
 			textSize(30);
 			//text(tempNote.getNote(), j * 100, border - 20);
-			text(tempNote.getNote(), j * offset, 50);
+			text(tempNote.getNote(), x, height/50);
 			//text(tempNote.getNote(), j * offset, border + height/4);
 		}
+
+
+		isSelected = new boolean[notes.size()];
 
 		//Display note
 		for(int k=0; k < notes.size(); k++){
 			Note tempNote = notes.get(k);
+			float x = map(k, 0, notes.size(), border, width - border);
+			//float y = map(k, 0, 10, border, height - noteSpacing);
+			float offset = height / 20;
+			//float y = map(k, 10, 0 , border, height - noteSpacing - offset);
+			float y = map(k, 9, 0 , border, height - noteSpacing - offset);
 			//Quaver
 			if(tempNote.getDuration() == 1){
-				
+				stroke(255);
+				fill(0);
+				circle(x, y, 25);
 			//Crotchet
 			}else if(tempNote.getDuration() == 2){
+				stroke(255);
+				fill(0);
+				circle(x, y, 25);
 
+				// stroke(255);
+				// strokeWeight(10);
+				stroke(0);
+				strokeWeight(3);
+				//fill(0,0,0);
+				line(x+8,y, x+8, y -50);
+				//line(x+30,y+ 200, x+45, y +200);
 			}
 		}
 	}
