@@ -63,24 +63,43 @@ public class ScoreDisplay extends PApplet
 		char _note= ' ';
 		char _duration= ' ';
 
-		//int stringLength = score.length();
-		for(int i=0; i < scoreChars.length; i++){
-			if(i == 0 ){
+		// //int stringLength = score.length();
+		// for(int i=0; i < scoreChars.length; i++){
+		// 	// if(i == 0 ){
+		// 	// 	_note = scoreChars[i];
+		// 	// 	//System.out.println(_note);
+		// 	// }else {
+		// 	// 	if(i % 2 == 0){
+		// 	// 		_note = scoreChars[i];
+		// 	// 		//System.out.println(_note);
+		// 	// 	}
+		// 	// 	else if(i % 2 == 1 ){
+		// 	// 		//System.out.println("My Turn");
+		// 	// 		_duration = scoreChars[i];
+		// 	// 		//System.out.println(_duration);
+		// 	// 		newNote = new Note(_note, Character.getNumericValue(_duration));
+		// 	// 		notes.add(newNote);
+		// 	// 	}
+		// 	// }
+		// }
+
+		for(int i=0; i < scoreChars.length-1; i++){
+			if(Character.isLetter(scoreChars[i]) && Character.isDigit(scoreChars[i+1])){
 				_note = scoreChars[i];
-				//System.out.println(_note);
-			}else {
-				if(i % 2 == 0){
-					_note = scoreChars[i];
-					//System.out.println(_note);
-				}
-				else if(i % 2 == 1 ){
-					//System.out.println("My Turn");
-					_duration = scoreChars[i];
-					//System.out.println(_duration);
-					newNote = new Note(_note, Character.getNumericValue(_duration));
-					notes.add(newNote);
+			}else if(Character.isDigit(scoreChars[i]) && Character.isLetter(scoreChars[i-1])){
+				_duration = scoreChars[i];
+				newNote = new Note(_note, Character.getNumericValue(_duration));
+				notes.add(newNote);
+			}else if(Character.isLetter(scoreChars[i]) && Character.isDigit(scoreChars[i-1])) {
+				_note = scoreChars[i];
+				for(int j=i; j< notes.size(); j++){
+					if(Character.isDigit(scoreChars[i+1])){
+						_duration = scoreChars[i];
+						break;
+					}
 				}
 			}
+			
 		}
 	}
 
