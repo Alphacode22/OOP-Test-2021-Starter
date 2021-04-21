@@ -1,7 +1,8 @@
 package ie.tudublin;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import processing.core.PApplet;
 import processing.data.TableRow;
@@ -27,6 +28,10 @@ public class ScoreDisplay extends PApplet
 	// public float leftMargin;
 	// public float margin;
 
+	HashMap<Character, Integer> locations = new HashMap<>();
+	
+
+
 
 
 	public void settings()
@@ -47,6 +52,23 @@ public class ScoreDisplay extends PApplet
 		// margin = height * 0.05f;
 		border = 100;
 	    noteSpacing = 100;
+
+		locations.put(convert('D'), convertInt(20));
+		locations.put(convert('E'), convertInt(18));
+		locations.put(convert('F'), convertInt(16));
+		locations.put(convert('G'), convertInt(14));
+		locations.put(convert('A'), convertInt(12));
+		locations.put(convert('B'), convertInt(10));
+		locations.put(convert('c'), convertInt(8));
+		locations.put(convert('d'), convertInt(6));
+	}
+
+	public Character convert(char in){
+		return Character.valueOf(in);
+	}
+
+	public Integer convertInt(int in){
+		return Integer.valueOf(in);
 	}
 
 	public void draw()
@@ -159,10 +181,12 @@ public class ScoreDisplay extends PApplet
 
 		//float section = map(1, 0, border, 0, width - border);
 		//float y = map(k, 9, 0 , border, height - noteSpacing - offset);
-		float section = height - border;
-		float offset = height / 20;
-		section /= notes.size()- noteSpacing - offset ;
+		// float section = height - border;
+		// float offset = height / 20;
+		// section /= notes.size()- noteSpacing - offset ;
 
+		//String score = "DEFGABcd";
+	
 		//Display note
 		for(int k=0; k < notes.size(); k++){
 			Note tempNote = notes.get(k);
@@ -170,9 +194,25 @@ public class ScoreDisplay extends PApplet
 			//float y = map(k, 0, 10, border, height - noteSpacing);
 			float offset = height / 20;
 			//float y = map(k, 10, 0 , border, height - noteSpacing - offset);
-			float y = map(k, 9, 0 , border, height - noteSpacing - offset);
-			
+			//float y = map(k, 9, 0 , border, height - noteSpacing - offset);
+			//float y = map(k, 9, 0 , border, height - noteSpacing - offset);
 			//selectNote(x, y);
+		    float y=0;
+
+		
+			for(Map.Entry<Character, Integer> location : locations.entrySet()){
+				if(Character.valueOf(tempNote.getNote()).equals(location.getKey())){
+					System.out.println(location.getKey() + "uo");
+					System.out.println(Character.valueOf(tempNote.getNote()));
+					y = location.getValue();
+					break;
+				}
+			}
+
+		
+			
+			
+
 			//Black Circle
 			noStroke();
 			//fill(0);
