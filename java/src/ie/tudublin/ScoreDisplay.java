@@ -14,7 +14,7 @@ enum NoteType {
 public class ScoreDisplay extends PApplet
 {
 	//String score = "DEFGABcd";
-	//String score = "D2E2F2G2A2B2c2d2";
+    //String score = "D2E2F2G2A2B2c2d2";
 	String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	char[] scoreChars = score.toCharArray();
 	
@@ -22,7 +22,7 @@ public class ScoreDisplay extends PApplet
 	private float border;
 	private float noteSpacing;
 
-	private boolean[] isSelected;
+	//private boolean[] isSelected;
 
 	// public float leftMargin;
 	// public float margin;
@@ -83,30 +83,42 @@ public class ScoreDisplay extends PApplet
 		// 	// }
 		// }
 
+		// for(int i=0; i < scoreChars.length-1; i++){
+		// 	if(Character.isLetter(scoreChars[i]) && Character.isDigit(scoreChars[i+1])){
+		// 		_note = scoreChars[i];
+		// 	}else if(Character.isDigit(scoreChars[i]) && Character.isLetter(scoreChars[i-1])){
+		// 		_duration = scoreChars[i];
+		// 		newNote = new Note(_note, Character.getNumericValue(_duration));
+		// 		notes.add(newNote);
+		// 	}else if(Character.isLetter(scoreChars[i]) && Character.isDigit(scoreChars[i-1])) {
+		// 		_note = scoreChars[i];
+		// 		for(int j=i; j< notes.size(); j++){
+		// 			if(Character.isDigit(scoreChars[i+1])){
+		// 				_duration = scoreChars[i];
+		// 				break;
+		// 			}
+		// 		}
+		// 	}
+			
+		// }
+		//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 		for(int i=0; i < scoreChars.length-1; i++){
 			if(Character.isLetter(scoreChars[i]) && Character.isDigit(scoreChars[i+1])){
 				_note = scoreChars[i];
-			}else if(Character.isDigit(scoreChars[i]) && Character.isLetter(scoreChars[i-1])){
-				_duration = scoreChars[i];
-				newNote = new Note(_note, Character.getNumericValue(_duration));
-				notes.add(newNote);
-			}else if(Character.isLetter(scoreChars[i]) && Character.isDigit(scoreChars[i-1])) {
+				_duration = scoreChars[i+1];
+			}else if(Character.isLetter(scoreChars[i]) && !Character.isDigit(scoreChars[i+1])){
 				_note = scoreChars[i];
-				for(int j=i; j< notes.size(); j++){
-					if(Character.isDigit(scoreChars[i+1])){
-						_duration = scoreChars[i];
-						break;
-					}
-				}
+				_duration = '1';
 			}
-			
+			newNote = new Note(_note, Character.getNumericValue(_duration));
+			notes.add(newNote);
 		}
 	}
 
 	void printScore(){
 		for(int i=0; i < notes.size(); i++){
 			Note n = notes.get(i);
-			String noteName = n.getDuration() > 2 ? "Quaver" : "Crotchet";
+			String noteName = n.getDuration() != 2 ? "Quaver" : "Crotchet";
 			System.out.println(n.getNote() + " " + n.getDuration() + " " + noteName );
 		}
 	}
@@ -143,9 +155,6 @@ public class ScoreDisplay extends PApplet
 			text(tempNote.getNote(), x, height/50);
 			//text(tempNote.getNote(), j * offset, border + height/4);
 		}
-
-
-		isSelected = new boolean[notes.size()];
 
 		//Display note
 		for(int k=0; k < notes.size(); k++){
