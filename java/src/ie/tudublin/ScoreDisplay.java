@@ -27,7 +27,11 @@ public class ScoreDisplay extends PApplet
 
 	public void setup() 
 	{
-		
+		loadScore();
+		// System.out.println("Note");
+		// for(int i=0; i < scoreChars.length; i++){
+		// 	System.out.println(scoreChars[i]);
+		// }
 	}
 
 	public void draw()
@@ -47,24 +51,28 @@ public class ScoreDisplay extends PApplet
 		Note newNote;
 
 		char _note= ' ';
-		int _duration=0;
+		char _duration= ' ';
 		//int stringLength = score.length();
 		for(int i=0; i < scoreChars.length; i++){
 			if(i == 0 ){
 				_note = scoreChars[i];
+				System.out.println(_note);
 			}else {
-				if(i % 2 == 1){
+				if(i % 2 == 0){
 					_note = scoreChars[i];
+					System.out.println(_note);
 				}
-				else if(i % 2 == 0 ){
+				else if(i % 2 == 1 ){
+					//System.out.println("My Turn");
 					_duration = scoreChars[i];
+					System.out.println(_duration);
+					newNote = new Note(_note, Character.getNumericValue(_duration));
+					notes.add(newNote);
 				}
 			}
-			
 		}
-		newNote = new Note(_note, _duration);
-		notes.add(newNote);
-
+	
+		// System.out.println("Debug ");
 		// for(int i=0; i < notes.size(); i++){
 		// 	Note n = notes.get(i);
 		// 	System.out.println(n);
