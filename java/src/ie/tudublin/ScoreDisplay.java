@@ -147,13 +147,12 @@ public class ScoreDisplay extends PApplet
 				fill(0);
 				circle(x, y, 25);
 
-				// stroke(255);
-				// strokeWeight(10);
+	
 				stroke(0);
 				strokeWeight(3);
-				//fill(0,0,0);
 				line(x+8,y, x+8, y -50);
-				//line(x+30,y+ 200, x+45, y +200);
+
+				line(x+8,y-50, x+18, y-30);
 			}
 		}
 	}
