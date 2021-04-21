@@ -136,22 +136,25 @@ public class ScoreDisplay extends PApplet
 			float offset = height / 20;
 			//float y = map(k, 10, 0 , border, height - noteSpacing - offset);
 			float y = map(k, 9, 0 , border, height - noteSpacing - offset);
+			
+			//Black Circle
+			noStroke();
+			fill(0);
+			circle(x, y, 25);
+
+			//Black line
+			stroke(0);
+			strokeWeight(3);
+			line(x+8,y, x+8, y -50);
+			
 			//Quaver
-			if(tempNote.getDuration() == 1){
-				stroke(255);
-				fill(0);
-				circle(x, y, 25);
+			// if(tempNote.getDuration() == 1){
+			// 	stroke(255);
+			// 	fill(0);
+			// 	circle(x, y, 25);
 			//Crotchet
-			}else if(tempNote.getDuration() == 2){
-				stroke(255);
-				fill(0);
-				circle(x, y, 25);
-
-	
-				stroke(0);
-				strokeWeight(3);
-				line(x+8,y, x+8, y -50);
-
+			if(tempNote.getDuration() == 2){
+				//Tick
 				line(x+8,y-50, x+18, y-30);
 			}
 		}
