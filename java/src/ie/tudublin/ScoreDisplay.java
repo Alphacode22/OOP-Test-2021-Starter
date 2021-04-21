@@ -16,13 +16,16 @@ public class ScoreDisplay extends PApplet
 {
 	//String score= "DEFGABcd";
    
-    //String score = "D2E2F2G2A2B2c2d2";
-	String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
+    String score = "D2E2F2G2A2B2c2d2";
+	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	char[] scoreChars = score.toCharArray();
 
 	String scoreTypeString = "DEFGABcd";
 	char[] scoreTypes = scoreTypeString.toCharArray();
-	float[] scoreY = {400, 350, 290, 250, 210, 180,130,100};
+	//float[] scoreY = {400, 350, 290, 250, 210, 180,130,100};
+
+	float firstY = 400f;
+	float[] scoreY= {firstY, firstY - 30, firstY- 70, firstY- 110, firstY- 150, firstY- 190, firstY- 230, firstY- 270};
 
 	
 	ArrayList<Note> notes = new ArrayList<Note>();
@@ -30,6 +33,27 @@ public class ScoreDisplay extends PApplet
 	private float noteSpacing;
 
 	float section;
+
+	private float[] frequencies = {293.66f, 329.63f, 369.99f, 392.00f, 440.00f, 493.88f, 554.37f, 587.33f};
+  
+    char spell(float freq)
+    {
+        // Return the element from the spellings array that freq is closest 
+        // to in the frequency array
+
+        int closestIndex = 0;
+        float smalestGap = Float.MAX_VALUE;
+        for(int i = 0 ; i < frequencies.length ; i ++)
+        {
+            float gap = abs(freq - frequencies[i]);
+            if (gap < smalestGap)
+            {
+                smalestGap = gap;
+                closestIndex = i;
+            }            
+        }
+        return scoreTypes[closestIndex];
+    }
 
 	public void settings()
 	{
