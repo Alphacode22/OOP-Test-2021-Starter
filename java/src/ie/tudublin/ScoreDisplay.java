@@ -118,15 +118,26 @@ public class ScoreDisplay extends PApplet
 
 			//draw horizontal
 			line(border, y, width - border, y);
+
+			// stroke(5);
+            // fill(100, 50, 50);
+            // textSize(30);
+            // text(i, x, border - 20);
+
+			//vertical text
+			for(int j=0; j< notes.size(); j++){
+				int offset =(int)width/ notes.size();
+				Note tempNote = notes.get(j);
+				stroke(5);
+				fill(100, 50, 50);
+				textSize(30);
+				//text(tempNote.getNote(), j * 100, border - 20);
+				text(tempNote.getNote(), j * offset, border + 20);
+			}
         }
 
-		// //vertical text
-		// for(int j=0; j< notes.size(); j++){
-		// 	Note tempNote = notes.get(j);
-		// 	stroke(5);
-		// 	fill(100, 50, 50);
-		// 	textSize(30);
-		// 	text(j, tempNote.getNote(), border - 20);
-		// }
+	
+
+		
 	}
 }
