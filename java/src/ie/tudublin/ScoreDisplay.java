@@ -9,12 +9,13 @@ import processing.data.TableRow;
 public class ScoreDisplay extends PApplet
 {
 	//String score = "DEFGABcd";
-	String score = "D2E2F2G2A2B2c2d2";
-	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
+	//String score = "D2E2F2G2A2B2c2d2";
+	String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	char[] scoreChars = score.toCharArray();
 	
 	ArrayList<Note> notes = new ArrayList<Note>();
 	private float border = 100;
+	private float noteSpacing = 100;
 
 	public float leftMargin;
 	public float margin;
@@ -98,7 +99,10 @@ public class ScoreDisplay extends PApplet
         textAlign(CENTER, CENTER);
 
 		//Displays the grid
-        for(int i = 0; i < 6; i++){
+        for(int i = 0; i < 5; i++){
+
+			stroke(5);
+			fill(100, 50, 50);
 
 			// // //Choose where to display
             // //float x = map(i, 1, 5, leftMargin, width - margin);
@@ -114,7 +118,7 @@ public class ScoreDisplay extends PApplet
 			//float x = map(i, 0, 5, border, width - border);
 			float x = map(i, 0, notes.size(), border, width - border);
 
-			float y = map(i, 0, 5, border, height - border);
+			float y = map(i, 0, 5, border, height - noteSpacing);
 
 			//draw horizontal
 			line(border, y, width - border, y);
@@ -125,19 +129,30 @@ public class ScoreDisplay extends PApplet
             // text(i, x, border - 20);
 
 			//vertical text
-			for(int j=0; j< notes.size(); j++){
-				int offset =(int)width/ notes.size();
-				Note tempNote = notes.get(j);
-				stroke(5);
-				fill(100, 50, 50);
-				textSize(30);
-				//text(tempNote.getNote(), j * 100, border - 20);
-				text(tempNote.getNote(), j * offset, border + 20);
-			}
         }
 
-	
+		//Display letter
+		for(int j=0; j< notes.size(); j++){
+			int offset =(int)width/ notes.size();
+			Note tempNote = notes.get(j);
+			stroke(5);
+			fill(100, 50, 50);
+			textSize(30);
+			//text(tempNote.getNote(), j * 100, border - 20);
+			text(tempNote.getNote(), j * offset, 50);
+			//text(tempNote.getNote(), j * offset, border + height/4);
+		}
 
-		
+		//Display note
+		for(int k=0; k < notes.size(); k++){
+			Note tempNote = notes.get(k);
+			//Quaver
+			if(tempNote.getDuration() == 1){
+				
+			//Crotchet
+			}else if(tempNote.getDuration() == 2){
+
+			}
+		}
 	}
 }
