@@ -8,8 +8,8 @@ import processing.data.TableRow;
 
 public class ScoreDisplay extends PApplet
 {
-	String score = "DEFGABcd";
-	//String score = "D2E2F2G2A2B2c2d2";
+	//String score = "DEFGABcd";
+	String score = "D2E2F2G2A2B2c2d2";
 	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	char[] scoreChars = score.toCharArray();
 	
@@ -48,20 +48,31 @@ public class ScoreDisplay extends PApplet
 
 		char _note= ' ';
 		int _duration=0;
-
-
 		//int stringLength = score.length();
 		for(int i=0; i < scoreChars.length; i++){
-			if(i % 1 == 0){
-				//_note = score[i]
+			if(i == 0 ){
+				_note = scoreChars[i];
+			}else {
+				if(i % 2 == 1){
+					_note = scoreChars[i];
+				}
+				else if(i % 2 == 0 ){
+					_duration = scoreChars[i];
+				}
 			}
-			if(i % 2 == 0 ){
-				
-			}
+			
 		}
+		newNote = new Note(_note, _duration);
+		notes.add(newNote);
+
+		// for(int i=0; i < notes.size(); i++){
+		// 	Note n = notes.get(i);
+		// 	System.out.println(n);
+		// }
 	}
 
 	void drawNotes()
 	{
+
 	}
 }
