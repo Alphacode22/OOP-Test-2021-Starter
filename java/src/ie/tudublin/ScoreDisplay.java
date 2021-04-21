@@ -14,8 +14,8 @@ enum NoteType {
 public class ScoreDisplay extends PApplet
 {
 	//String score = "DEFGABcd";
-	String score = "D2E2F2G2A2B2c2d2";
-	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
+	//String score = "D2E2F2G2A2B2c2d2";
+	String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	char[] scoreChars = score.toCharArray();
 	
 	ArrayList<Note> notes = new ArrayList<Note>();
@@ -137,13 +137,15 @@ public class ScoreDisplay extends PApplet
 			//float y = map(k, 10, 0 , border, height - noteSpacing - offset);
 			float y = map(k, 9, 0 , border, height - noteSpacing - offset);
 			
+			//selectNote(x, y);
 			//Black Circle
 			noStroke();
-			fill(0);
+			//fill(0);
+			selectNote(x, y);
 			circle(x, y, 25);
 
 			//Black line
-			stroke(0);
+			//stroke(0);
 			strokeWeight(3);
 			line(x+8,y, x+8, y -50);
 			
@@ -158,5 +160,22 @@ public class ScoreDisplay extends PApplet
 				line(x+8,y-50, x+18, y-30);
 			}
 		}
+	}
+
+	// public void mouseClicked(){
+	// 	selectNote();
+	// }
+
+	void selectNote(float x, float y){
+		if(mouseX > x-10 && mouseX < x+10 ){
+			fill(255,0,0);
+			stroke(255,0,0);
+		}
+		else
+		{
+			fill(0);
+			stroke(0);
+		}
+		
 	}
 }
